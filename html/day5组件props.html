@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>day3类式组件</title>
+  <title>day5组件props</title>
   <style link="../css/antd.min.css"></style>
 </head>
 <body>
@@ -17,29 +17,31 @@
   <script type="text/babel">
     const app = document.getElementById('app')
     // 1，创建组件
-    class MainBox extends React.Component {
-      constructor(props) {
-        super(props)
-        this.state = {
-          isHost: false
-        }
-        this.onChange = this.onChange.bind(this)
-      }
-      onChange() {
-        this.setState({
-          isHost: !this.state.isHost
-        })
+    class Person extends React.Component {
+      state = {
+        isHost: false
       }
       render() {
-        return <div>
-            <h1>今天天气很{ this.state.isHost ? '不错':'糟糕' }</h1>
-            <button onClick={this.onChange}>改变</button>
+        const { name, sex, age } = this.props
+        return (
+          <div>
+            <ul>
+              <li>姓名：{name}</li>
+              <li>性别：{sex}</li>
+              <li>年龄：{age}</li>
+            </ul>
           </div>
+        )
       }
     }
 
     // 2，渲染组件到页面
-    ReactDOM.render(<MainBox/>, app)
+    const obj = {
+      name: '张三',
+      sex: '男',
+      age: '20'
+    }
+    ReactDOM.render(<Person { ...obj } />, app)
   </script>
 </body>
 </html>
