@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>day6组件props类型限制</title>
+  <title>day7组件props类型限制简写</title>
   <style link="../css/antd.min.css"></style>
 </head>
+
 <body>
   <div id="app"></div>
   <script src="../js/react.js"></script>
@@ -23,6 +25,16 @@
       state = {
         isHost: false
       }
+      // 限制传递props
+      static propTypes = {
+        name: PropTypes.string.isRequired,
+        sex: PropTypes.string,
+        age: PropTypes.number
+      }
+      // 默认props
+      static defaultProps = {
+        age: 15
+      }
       render() {
         const { name, sex, age } = this.props
         return (
@@ -36,23 +48,14 @@
         )
       }
     }
-    // 限制传递props
-    Person.propTypes = {
-      name: PropTypes.string.isRequired,
-      sex: PropTypes.string,
-      age: PropTypes.number
-    }
-    // 默认props
-    Person.defaultProps = {
-      age: 15
-    }
 
     // 2，渲染组件到页面
     const obj = {
       name: '张三',
       sex: '男'
     }
-    ReactDOM.render(<Person { ...obj } />, app)
+    ReactDOM.render(<Person {...obj} />, app)
   </script>
 </body>
+
 </html>

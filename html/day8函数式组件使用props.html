@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>day6组件props类型限制</title>
+  <title>day8函数式组件使用props</title>
   <style link="../css/antd.min.css"></style>
 </head>
+
 <body>
   <div id="app"></div>
   <script src="../js/react.js"></script>
@@ -19,40 +21,26 @@
     const app = document.getElementById('app')
 
     // 1，创建组件
-    class Person extends React.Component {
-      state = {
-        isHost: false
-      }
-      render() {
-        const { name, sex, age } = this.props
-        return (
-          <div>
-            <ul>
-              <li>姓名：{name}</li>
-              <li>性别：{sex}</li>
-              <li>年龄：{age}</li>
-            </ul>
-          </div>
-        )
-      }
-    }
-    // 限制传递props
-    Person.propTypes = {
-      name: PropTypes.string.isRequired,
-      sex: PropTypes.string,
-      age: PropTypes.number
-    }
-    // 默认props
-    Person.defaultProps = {
-      age: 15
+    function Person (props) {
+      return (
+        <div>
+          <ul>
+            <li>姓名：{props.name}</li>
+            <li>性别：{props.sex}</li>
+            <li>年龄：{props.age}</li>
+          </ul>
+        </div>
+      )
     }
 
     // 2，渲染组件到页面
     const obj = {
       name: '张三',
-      sex: '男'
+      sex: '男',
+      age: 20
     }
-    ReactDOM.render(<Person { ...obj } />, app)
+    ReactDOM.render(<Person {...obj} />, app)
   </script>
 </body>
+
 </html>
