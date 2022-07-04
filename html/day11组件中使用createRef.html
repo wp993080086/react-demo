@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day11组件中使用createRef</title>
+  <style link="../css/antd.min.css"></style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="../js/react.js"></script>
+  <script src="../js/react-dom.js"></script>
+  <script src="../js/prop-types.min.js"></script>
+  <script src="../js/babel.js"></script>
+  <script src="../js/antd.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById('app')
+
+    // 1，创建组件
+    class Ipt extends React.Component {
+      myIpt = React.createRef()
+      showLeft = () => {
+        console.log(this.myIpt.current.value)
+      }
+      render() {
+        return (
+          <div>
+            <input type="text" ref={this.myIpt} />
+            <button onClick={this.showLeft}>点击按钮弹出左侧输入框内容</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Ipt />, app)
+  </script>
+</body>
+
+</html>

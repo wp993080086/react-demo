@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day12组件的生命周期</title>
+  <style link="../css/antd.min.css"></style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="../js/react.js"></script>
+  <script src="../js/react-dom.js"></script>
+  <script src="../js/prop-types.min.js"></script>
+  <script src="../js/babel.js"></script>
+  <script src="../js/antd.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById('app')
+
+    // 1，创建组件
+    class Life extends React.Component {
+      h = React.createRef()
+      thisDie = () => {
+        console.log(this.h)
+      }
+      render() {
+        return (
+          <div>
+            <h1 ref={this.h}>React学不会怎么办？</h1>
+            <button onClick={this.thisDie}>不活了</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Life />, app)
+  </script>
+</body>
+
+</html>
