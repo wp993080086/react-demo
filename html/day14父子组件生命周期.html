@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day14父子组件生命周期</title>
+  <style link="../css/antd.min.css"></style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="../js/react.js"></script>
+  <script src="../js/react-dom.js"></script>
+  <script src="../js/prop-types.min.js"></script>
+  <script src="../js/babel.js"></script>
+  <script src="../js/antd.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById('app')
+
+    // 1，创建组件
+    class A extends React.Component {
+      state = {
+        car: '库里南'
+      }
+      changeCar = () => {
+        const carList = ['梅赛德斯', '劳斯莱斯', '法拉利', '玛莎拉蒂', '布加迪·威龙', '宾利', '比亚迪·汉']
+        const num = Math.floor(Math.random() * 7)
+        this.setState({
+          car: carList[num]
+        })
+      }
+      // 生命周期 组件挂载之前
+      componentWillMount() {
+        console.log('A---我即将挂载！')
+      }
+      // 生命周期 组件挂载完毕
+      componentDidMount() {
+        console.log('A---我挂载好了!')
+      }
+      // 生命周期 组件卸载完毕
+      componentWillUnmount() {
+        console.log('A---我被卸载了！')
+      }
+      // 生命周期 组件是否应该被更新，如果没写该回调，默认返回true，写了的话，必须返回true或者false，返回false则不会更新render视图
+      shouldComponentUpdate() {
+        console.log('A---组件是否应该被更新！', true)
+        return true
+      }
+      // 生命周期 组件更新之前
+      componentWillUpdate() {
+        console.log('A---组件更新之前！')
+      }
+      // 生命周期 组件更新之后
+      componentDidUpdate() {
+        console.log('A---组件更新之后！')
+      }
+      render() {
+        return (
+          <div>
+            <h1>今天出门开什么车？</h1>
+            <button onClick={this.changeCar}>随机选择一辆</button>
+            <B carName={this.state.car} />
+          </div>
+        )
+      }
+    }
+
+    // 2，创建组件
+    class B extends React.Component {
+      constructor(props) {
+        super(props)
+      }
+      // 生命周期 props更新之前（第一次接收props不触发）
+      componentWillReceiveProps() {
+        console.log('B---props更新之前！')
+      }
+      // 生命周期 组件挂载之前
+      componentWillMount() {
+        console.log('B---我即将挂载！')
+      }
+      // 生命周期 组件挂载完毕
+      componentDidMount() {
+        console.log('B---我挂载好了!')
+      }
+      // 生命周期 组件卸载完毕
+      componentWillUnmount() {
+        console.log('B---我被卸载了！')
+      }
+      // 生命周期 组件是否应该被更新，如果没写该回调，默认返回true，写了的话，必须返回true或者false，返回false则不会更新render视图
+      shouldComponentUpdate() {
+        console.log('B---组件是否应该被更新！', true)
+        return true
+      }
+      // 生命周期 组件更新之前
+      componentWillUpdate() {
+        console.log('B---组件更新之前！')
+      }
+      // 生命周期 组件更新之后
+      componentDidUpdate() {
+        console.log('B---组件更新之后！')
+      }
+      render() {
+        return (
+          <div>
+            <h1>{this.props.carName}</h1>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<A />, app)
+  </script>
+</body>
+
+</html>
