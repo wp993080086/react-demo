@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day16新生命周期</title>
+  <style link="../css/antd.min.css"></style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="../js/react.js"></script>
+  <script src="../js/react-dom.js"></script>
+  <script src="../js/prop-types.min.js"></script>
+  <script src="../js/babel.js"></script>
+  <script src="../js/antd.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById('app')
+
+    // 1，创建组件
+    class Life extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          count: 0
+        }
+      }
+      // 加数
+      addNumber = () => {
+        let count = this.state.count
+        count++
+        this.setState({
+          count
+        })
+      }
+      // 生命周期 props更新之前（第一次接收props不触发）
+      UNSAFE_componentWillReceiveProps() {
+        console.log('props更新之前！')
+      }
+      // 生命周期 组件挂载之前
+      UNSAFE_componentWillMount() {
+        console.log('我即将挂载！')
+      }
+      // 生命周期 组件挂载完毕
+      componentDidMount() {
+        console.log('我挂载好了!')
+      }
+      // 生命周期 组件卸载完毕
+      componentWillUnmount() {
+        console.log('我被卸载了！')
+      }
+      // 生命周期 组件是否应该被更新，如果没写该回调，默认返回true，写了的话，必须返回true或者false，返回false则不会更新render视图
+      shouldComponentUpdate() {
+        console.log('组件是否应该被更新！', true)
+        return true
+      }
+      // 生命周期 组件更新之前
+      UNSAFE_componentWillUpdate() {
+        console.log('组件更新之前！')
+      }
+      // 若state的值任何时候都取决于props时候可以使用
+      static getDerivedStateFromProps(props, state) {
+        console.log('getDerivedStateFromProps', props, state)
+        return null
+      }
+      // 在视图更新之前获取快照
+      getSnapshotBeforeUpdate() {
+        console.log('getSnapshotBeforeUpdate')
+        return '我是一个快照值'
+      }
+      // 生命周期 组件更新之后
+      componentDidUpdate(oldProps, oldState, snapshot) {
+        console.log('组件更新之后！')
+        console.log(oldProps)
+        console.log(oldState)
+        console.log(snapshot)
+      }
+      render() {
+        return (
+          <div>
+            <h1>计数：{ this.state.count }</h1>
+            <button onClick={this.addNumber}>加1</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Life />, app)
+  </script>
+</body>
+
+</html>
