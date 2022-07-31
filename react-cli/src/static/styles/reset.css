@@ -1,7 +1,6 @@
 html,
 body,
-#root,
-#app {
+#root{
   font-family: 'PingFangSC-Medium', 'PingFang SC', 'Helvetica', 'PingFang SC', 'Helvetica Neue',
     Arial, 'Hiragino Sans GB', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
   width: 100%;
